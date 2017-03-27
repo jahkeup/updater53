@@ -1,7 +1,6 @@
 package whatip
 
 import (
-	"context"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -11,6 +10,7 @@ import (
 	"time"
 
 	"github.com/cenkalti/backoff"
+	"golang.org/x/net/context"
 	"golang.org/x/net/context/ctxhttp"
 )
 
