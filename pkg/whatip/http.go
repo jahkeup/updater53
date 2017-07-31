@@ -19,6 +19,7 @@ const maxHTTPRequestTime = time.Second * 120
 var (
 	IfconfigMeHTTP = newHTTP("http://ifconfig.me/ip")
 	ICanHazIPHTTP  = newHTTP("http://icanhazip.com")
+	AWSHTTP        = newHTTP("http://checkip.amazonaws.com")
 )
 
 type HTTP struct {
@@ -36,6 +37,7 @@ func (h *HTTP) GetIP() (ip net.IP, err error) {
 
 	req, _ := http.NewRequest("GET", h.url.String(), nil)
 	req.Header.Add("User-Agent", "curl/7.53.1")
+	req.Header.Add("Accept", "text/plain")
 
 	// try once
 	if resp, err := ctxhttp.Do(ctx, client, req); err == nil {

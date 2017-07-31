@@ -10,4 +10,5 @@ type Config struct {
 	Records []string
 	IPer    whatip.IPer
 	Session *session.Session
+	Commit  bool
 }

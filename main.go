@@ -14,8 +14,9 @@ import (
 )
 
 func main() {
-	flagIPMethod := flag.String("ipmethod", "opendns", "IP lookup provider: opendns, ifconfigme, icanhazip")
+	flagIPMethod := flag.String("ipmethod", "opendns", "IP lookup provider: opendns, ifconfigme, icanhazip, aws")
 	flagRecords := flag.String("records", "", "Records to be updated, these are the A records that you want updated")
+	flagDry := flag.Bool("dryrun", false, "Dry-run")
 	flag.Parse()
 
 	if *flagRecords == "" {
@@ -31,6 +32,8 @@ func main() {
 		iper = whatip.IfconfigMeHTTP
 	case "icanhazip":
 		iper = whatip.ICanHazIPHTTP
+	case "aws":
+		iper = whatip.AWSHTTP
 	default:
 		log.Panicf("unknown ipmethod %q", *flagIPMethod)
 	}
@@ -44,6 +47,7 @@ func main() {
 		Records: records,
 		IPer:    iper,
 		Session: sess,
+		Commit:  !*flagDry,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -66,13 +70,10 @@ func Update(conf Config) (err error) {
 		zonemap[*zone.Name] = *zone.Id
 	}
 
-zoneCheck:
 	for _, rec := range conf.Records {
-		if zoneID(zonemap, rec) != "" {
-			continue zoneCheck
+		if zoneID(zonemap, rec) == "" {
+			return fmt.Errorf("no zone for record %q found", rec)
 		}
-
-		return fmt.Errorf("no zone for record %q found", rec)
 	}
 
 	newip, err := conf.IPer.GetIP()
@@ -83,6 +84,10 @@ zoneCheck:
 
 	for _, rec := range conf.Records {
 		log.Printf("updating record %q", rec)
+		if !conf.Commit {
+			log.Printf("skipping...")
+			continue
+		}
 		err = updateRecord(r53, zoneID(zonemap, rec), rec, newip)
 		if err != nil {
 			return fmt.Errorf("error updating record %q: %s", rec, err)
