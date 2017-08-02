@@ -17,6 +17,7 @@ func main() {
 	flagIPMethod := flag.String("ipmethod", "opendns", "IP lookup provider: opendns, ifconfigme, icanhazip, aws")
 	flagRecords := flag.String("records", "", "Records to be updated, these are the A records that you want updated")
 	flagDry := flag.Bool("dryrun", false, "Dry-run")
+	flagCustom := flag.String("custom", "", "Custom IP lookup provider")
 	flag.Parse()
 
 	if *flagRecords == "" {
@@ -25,17 +26,25 @@ func main() {
 	records := strings.Split(*flagRecords, ",")
 
 	var iper whatip.IPer
-	switch *flagIPMethod {
-	case "opendns":
-		iper = whatip.OpenDNS
-	case "ifconfigme":
-		iper = whatip.IfconfigMeHTTP
-	case "icanhazip":
-		iper = whatip.ICanHazIPHTTP
-	case "aws":
-		iper = whatip.AWSHTTP
-	default:
-		log.Panicf("unknown ipmethod %q", *flagIPMethod)
+	if *flagCustom != "" {
+		var err error
+		iper, err = whatip.NewHTTP(*flagCustom)
+		if err != nil {
+			log.Panicf("invalid custom ipmethod %q: %s", *flagCustom, err)
+		}
+	} else {
+		switch *flagIPMethod {
+		case "opendns":
+			iper = whatip.OpenDNS
+		case "ifconfigme":
+			iper = whatip.IfconfigMeHTTP
+		case "icanhazip":
+			iper = whatip.ICanHazIPHTTP
+		case "aws":
+			iper = whatip.AWSHTTP
+		default:
+			log.Panicf("unknown ipmethod %q", *flagIPMethod)
+		}
 	}
 
 	sess, err := session.NewSession()
