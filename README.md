@@ -1,5 +1,7 @@
 # Update Route53 - Dynamic DNS on Route53
 
+[![Build Status](https://travis-ci.org/jahkeup/updater53.svg?branch=master)](https://travis-ci.org/jahkeup/updater53)
+
 This program enables you to update a record on Route53 to point to
 your public IP address if you don't have a static address. This can be
 scheduled using cron or any other scheduling tool of choice.
