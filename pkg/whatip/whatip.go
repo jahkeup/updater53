@@ -10,6 +10,6 @@ var (
 )
 
 // IPers can return the public IP address of the caller.
-type IPer interface {
+type IPResolver interface {
 	GetIP() (ip net.IP, err error)
 }

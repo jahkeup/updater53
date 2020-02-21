@@ -1,16 +1,17 @@
-package whatip
+package whatip_test
 
 import (
 	"testing"
 
+	"github.com/jahkeup/updater53/pkg/whatip"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestHTTP(t *testing.T) {
-	providers := map[string]IPer{
-		"ifconfig.me":   IfconfigMeHTTP,
-		"icanhazip.com": ICanHazIPHTTP,
+	providers := map[string]whatip.IPResolver{
+		"ifconfig.me":   whatip.IfconfigMeHTTP,
+		"icanhazip.com": whatip.ICanHazIPHTTP,
 	}
 
 	for prov, http := range providers {
