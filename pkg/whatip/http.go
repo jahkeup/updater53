@@ -17,9 +17,9 @@ import (
 const maxHTTPRequestTime = time.Second * 120
 
 var (
-	IfconfigMeHTTP = newHTTP("http://ifconfig.me/ip")
-	ICanHazIPHTTP  = newHTTP("http://icanhazip.com")
-	AWSHTTP        = newHTTP("http://checkip.amazonaws.com")
+	IfconfigMeHTTP = newHTTP("https://ifconfig.me/ip")
+	ICanHazIPHTTP  = newHTTP("https://icanhazip.com")
+	AWSHTTP        = newHTTP("https://checkip.amazonaws.com")
 )
 
 type HTTP struct {
