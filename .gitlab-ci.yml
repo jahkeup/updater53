@@ -1,0 +1,7 @@
+build:
+  image: golang:1.13
+  tags:
+    - docker
+  script:
+    - make build test
+
