@@ -1,6 +1,8 @@
 # Update Route53 - Dynamic DNS on Route53
 
 [![Build Status](https://travis-ci.org/jahkeup/updater53.svg?branch=master)](https://travis-ci.org/jahkeup/updater53)
+![Go](https://github.com/jahkeup/updater53/workflows/Go/badge.svg)
+[![pipeline status](https://gitlab.com/jake/updater53/badges/master/pipeline.svg)](https://gitlab.com/jake/updater53/-/commits/master)
 
 This program enables you to update a record on Route53 to point to
 your public IP address if you don't have a static address. This can be
@@ -24,9 +26,9 @@ already pointing to "108.228.144.143"
 
 ## Install
 
-This tool is go gettable and can be installed by running `go get -u -x
+This tool is go gettable with Go 1.13. It can be installed by running `go get -u -x
 github.com/jahkeup/updater53`. The AWS Authentication is handled by
-the Golang SDK and can be configured in the same fashion as
+the AWS Go SDK and can be configured in the same fashion as
 you'd
 [configure the aws cli utility or other SDK usages](http://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html) (in
 the `$HOME/.aws/credentials` file or via environment variables).
