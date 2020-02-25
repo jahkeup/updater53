@@ -10,7 +10,7 @@ import (
 
 var (
 	// OpenDNS provides an IP address lookup mechanism via DNS query.
-	OpenDNS = openDNS{}
+	OpenDNS = &openDNS{}
 
 	opendnsResolvers = []string{
 		"208.67.222.123:53",
