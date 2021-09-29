@@ -1,2 +1,8 @@
 /updater53
 /.idea
+.envrc
+result
+result-*
+*.log
+*.tmp
+*.txt
