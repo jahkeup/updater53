@@ -1,7 +1,13 @@
 build:
-  image: golang:1.13
+  image: golang:latest
   tags:
     - docker
   script:
     - make build test
 
+lint:
+  image: golangci/golangci-lint:latest
+  tags:
+    - docker
+  script:
+    - make lint
