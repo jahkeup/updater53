@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.43.8
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/miekg/dns v1.1.45
+	github.com/miekg/dns v1.1.47
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.7.0
 	gopkg.in/yaml.v2 v2.4.0 // indirect
