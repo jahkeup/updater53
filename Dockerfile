@@ -1,4 +1,4 @@
-FROM golang:1.8 as builder
+FROM golang:1.19.3 as builder
 
 WORKDIR /go/src/github.com/jahkeup/updater53
 COPY . .
