@@ -5,7 +5,7 @@ go 1.23.0
 require (
 	github.com/aws/aws-sdk-go v1.55.8
 	github.com/cenkalti/backoff v2.2.1+incompatible
-	github.com/miekg/dns v1.1.67
+	github.com/miekg/dns v1.1.68
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.1
 )
